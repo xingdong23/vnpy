@@ -3,7 +3,7 @@ from vnpy.event import EventEngine
 from vnpy.trader.engine import MainEngine
 from vnpy.trader.ui import MainWindow, create_qapp
 
-from vnpy_ctp import CtpGateway
+# from vnpy_ctp import CtpGateway
 # from vnpy_ctptest import CtptestGateway
 # from vnpy_mini import MiniGateway
 # from vnpy_femas import FemasGateway
@@ -15,7 +15,7 @@ from vnpy_ctp import CtpGateway
 # from vnpy_tora import ToraStockGateway
 # from vnpy_tora import ToraOptionGateway
 # from vnpy_comstar import ComstarGateway
-# from vnpy_ib import IbGateway
+from vnpy_ib import IbGateway
 # from vnpy_tap import TapGateway
 # from vnpy_da import DaGateway
 # from vnpy_rohon import RohonGateway
@@ -49,7 +49,7 @@ def main():
 
     main_engine = MainEngine(event_engine)
 
-    main_engine.add_gateway(CtpGateway)
+    # main_engine.add_gateway(CtpGateway)
     # main_engine.add_gateway(CtptestGateway)
     # main_engine.add_gateway(MiniGateway)
     # main_engine.add_gateway(FemasGateway)
@@ -62,7 +62,7 @@ def main():
     # main_engine.add_gateway(ToraOptionGateway)
     # main_engine.add_gateway(OesGateway)
     # main_engine.add_gateway(ComstarGateway)
-    # main_engine.add_gateway(IbGateway)
+    main_engine.add_gateway(IbGateway)
     # main_engine.add_gateway(TapGateway)
     # main_engine.add_gateway(DaGateway)
     # main_engine.add_gateway(RohonGateway)

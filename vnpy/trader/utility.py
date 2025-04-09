@@ -11,7 +11,14 @@ from decimal import Decimal
 from math import floor, ceil
 
 import numpy as np
-import talib
+
+# Try to import talib, but continue if it's not available
+try:
+    import talib
+except ImportError:
+    print("Warning: talib not available, some functions may not work properly")
+    talib = None
+
 from zoneinfo import ZoneInfo, available_timezones      # noqa
 
 from .object import BarData, TickData
@@ -582,6 +589,10 @@ class ArrayManager:
         """
         Simple moving average.
         """
+        if talib is None:
+            print("Warning: talib not available, cannot calculate SMA")
+            return 0.0 if not array else np.zeros(len(self.close))
+
         result_array: np.ndarray = talib.SMA(self.close, n)
         if array:
             return result_array
@@ -593,6 +604,10 @@ class ArrayManager:
         """
         Exponential moving average.
         """
+        if talib is None:
+            print("Warning: talib not available, cannot calculate EMA")
+            return 0.0 if not array else np.zeros(len(self.close))
+
         result_array: np.ndarray = talib.EMA(self.close, n)
         if array:
             return result_array
@@ -809,6 +824,13 @@ class ArrayManager:
         """
         MACD.
         """
+        if talib is None:
+            print("Warning: talib not available, cannot calculate MACD")
+            zeros = np.zeros(len(self.close))
+            if array:
+                return zeros, zeros, zeros
+            return 0.0, 0.0, 0.0
+
         macd, signal, hist = talib.MACD(
             self.close, fast_period, slow_period, signal_period
         )
