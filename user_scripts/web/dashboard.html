@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeighNa 交易平台 - 仪表盘</title>
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Optional: Add custom base styles or overrides here */
+        body {
+            font-family: 'Inter', sans-serif; /* Example font */
+        }
+        /* Style for sidebar active link */
+        .sidebar-link.active {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: white;
+        }
+    </style>
+    <!-- Include a font, e.g., Inter -->
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-200">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white flex flex-col fixed h-full">
+            <!-- Logo/Brand -->
+            <div class="h-16 flex items-center justify-center text-xl font-bold border-b border-gray-700">
+                VeighNa 交易平台
+            </div>
+            <!-- Navigation Links -->
+            <nav class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+                <a href="dashboard.html" class="sidebar-link active flex items-center px-4 py-2 rounded hover:bg-gray-700">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    仪表盘
+                </a>
+
+                <a href="models.html" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-gray-700">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    回测管理
+                </a>
+                <a href="data_management.html" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-gray-700">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7l8 5m0 0l8-5m-8 5v10"/> </svg>
+                    数据管理
+                </a>
+                <a href="live_trading.html" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-gray-700">
+                     <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/> </svg>
+                    实盘交易
+                </a>
+                <a href="cta_strategies.html" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-gray-700">
+                     <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/> </svg>
+                    CTA策略
+                </a>
+            </nav>
+            <!-- User Area/Logout -->
+            <div class="border-t border-gray-700 p-4">
+                 <a href="settings.html" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-gray-700">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/> </svg>
+                    设置
+                </a>
+                <a href="login.html" class="sidebar-link flex items-center px-4 py-2 mt-2 text-red-400 rounded hover:bg-gray-700">
+                     <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/> </svg>
+                    登出
+                </a>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden ml-64"> <!-- Add ml-64 for fixed sidebar -->
+            <!-- Header -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-800">仪表盘</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600">欢迎, 用户!</span>
+                     <!-- User profile dropdown can go here -->
+                </div>
+            </header>
+
+            <!-- Content area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <div class="container mx-auto">
+                    <!-- 交易接口状态 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-lg font-semibold text-gray-700 mb-2">交易接口</h2>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">CTP: <span class="text-green-500 font-bold">已连接</span></p>
+                                <p class="text-gray-600">IB: <span class="text-green-500 font-bold">已连接</span></p>
+                                <p class="text-gray-600">XTP: <span class="text-red-500 font-bold">未连接</span></p>
+                            </div>
+                            <a href="gateway.html" class="text-blue-500 hover:underline mt-4 inline-block">管理接口</a>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-lg font-semibold text-gray-700 mb-2">策略状态</h2>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">CTA策略: <span class="font-bold">3</span> 个运行中</p>
+                                <p class="text-gray-600">Alpha策略: <span class="font-bold">2</span> 个运行中</p>
+                                <p class="text-gray-600">算法交易: <span class="font-bold">1</span> 个运行中</p>
+                            </div>
+                            <a href="strategies.html" class="text-blue-500 hover:underline mt-4 inline-block">查看策略</a>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-lg font-semibold text-gray-700 mb-2">账户概览</h2>
+                            <div class="space-y-2">
+                                <p class="text-gray-600">可用资金: <span class="font-bold">1,000,000.00</span> 元</p>
+                                <p class="text-gray-600">持仓市值: <span class="font-bold">500,000.00</span> 元</p>
+                                <p class="text-gray-600">今日盈亏: <span class="text-green-500 font-bold">+15,000.00</span> 元</p>
+                            </div>
+                            <a href="account.html" class="text-blue-500 hover:underline mt-4 inline-block">账户详情</a>
+                        </div>
+                    </div>
+
+                    <!-- 持仓和成交信息 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-lg font-semibold text-gray-700 mb-4">当前持仓</h2>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">合约</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方向</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">均价</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">盈亏</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">IF2109</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-red-600">空</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">2</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">5,230.00</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-green-600">+8,400.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">rb2110</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-red-600">空</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">10</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">5,120.00</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-green-600">+5,200.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">AAPL</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-green-600">多</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">100</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">150.25</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-red-600">-1,200.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="position.html" class="text-blue-500 hover:underline mt-4 inline-block">查看全部持仓</a>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h2 class="text-lg font-semibold text-gray-700 mb-4">最近成交</h2>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">合约</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方向</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">开平</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">价格</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">14:30:25</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">IF2109</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-red-600">空</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">开仓</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">1</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">5,230.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">14:15:10</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">rb2110</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-red-600">空</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">开仓</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">5</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">5,120.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">13:45:32</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">AAPL</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-green-600">多</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">平仓</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">50</td>
+                                            <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">149.75</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="trade.html" class="text-blue-500 hover:underline mt-4 inline-block">查看全部成交</a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
