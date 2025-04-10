@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeighNa 交易平台 - 交易中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-link.active { background-color: #3b82f6; color: white; }
+    </style>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-200">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden ml-64">
+            <!-- 头部 -->
+            <header class="bg-white shadow p-4">
+                <h1 class="text-xl font-semibold text-gray-800">交易中心</h1>
+            </header>
+
+            <!-- 内容区域 -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <div class="container mx-auto space-y-6">
+
+                    <!-- 交易接口状态 -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Trading Interface Block Removed -->
+                        <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow"> <!-- Changed lg:col-span-2 to lg:col-span-3 -->
+                             <h2 class="text-lg font-semibold text-gray-700 mb-3 border-b pb-2">账户概要</h2>
+                             <!-- Added Compact Connection Status -->
+                             <div class="text-xs text-gray-500 mb-3 -mt-2 border-b pb-2">
+                                 接口状态: 
+                                 CTP <span class="font-medium text-green-600">已连接</span> | 
+                                 IB <span class="font-medium text-green-600">已连接</span> | 
+                                 XTP <span class="font-medium text-red-500">未连接</span>
+                                 <a href="#" class="text-blue-500 hover:text-blue-700 ml-2">[管理]</a> <!-- Placeholder for manage link -->
+                             </div>
+                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                 <div>
+                                     <p class="text-sm text-gray-500">可用资金</p>
+                                     <p class="text-lg font-semibold text-gray-900">1,000,000.00 元</p>
+                                 </div>
+                                 <div>
+                                     <p class="text-sm text-gray-500">占用保证金</p>
+                                     <p class="text-lg font-semibold text-gray-900">200,000.00 元</p>
+                                 </div>
+                                 <div>
+                                     <p class="text-sm text-gray-500">持仓市值</p>
+                                     <p class="text-lg font-semibold text-gray-900">500,000.00 元</p>
+                                 </div>
+                                 <div>
+                                     <p class="text-sm text-gray-500">当日盈亏</p>
+                                     <p class="text-lg font-semibold text-green-600">+15,000.00 元</p>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- 交易下单区域 -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-3 border-b pb-2">交易下单 (已移除)</h2>
+                        <p class="text-gray-500 text-sm">详细下单功能已移除，请使用下方的快捷操作面板。</p>
+                        <!-- Detailed form and quote display removed -->
+                    </div>
+
+                    <!-- 快捷操作面板 -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">快捷操作</h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            <!-- 市价全平按钮 -->
+                            <div>
+                                <label for="quick_liq_symbol" class="block text-xs font-medium text-gray-700 mb-1">市价全平</label>
+                                <div class="flex">
+                                    <input type="text" id="quick_liq_symbol" class="flex-1 rounded-l-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="合约代码">
+                                    <button onclick="quickLiquidate()" class="bg-red-500 text-white px-3 py-1 rounded-r-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 text-sm">执行</button>
+                                </div>
+                            </div>
+                            <!-- 市价反手按钮 -->
+                            <div>
+                                <label for="quick_rev_symbol" class="block text-xs font-medium text-gray-700 mb-1">市价反手</label>
+                                <div class="flex">
+                                    <input type="text" id="quick_rev_symbol" class="flex-1 rounded-l-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="合约代码">
+                                    <button onclick="quickReverse()" class="bg-yellow-500 text-white px-3 py-1 rounded-r-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-1 text-sm">执行</button>
+                                </div>
+                            </div>
+                             <!-- 快速市价买入 -->
+                            <div>
+                                <label for="quick_buy_symbol" class="block text-xs font-medium text-gray-700 mb-1">市价买入</label>
+                                <div class="flex">
+                                    <input type="text" id="quick_buy_symbol" class="flex-grow rounded-l-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="合约">
+                                    <input type="number" id="quick_buy_volume" class="w-16 border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="数量">
+                                    <button onclick="quickMarketBuy()" class="bg-green-500 text-white px-3 py-1 rounded-r-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1 text-sm">买入</button>
+                                </div>
+                            </div>
+                             <!-- 快速市价卖出 -->
+                            <div>
+                                <label for="quick_sell_symbol" class="block text-xs font-medium text-gray-700 mb-1">市价卖出</label>
+                                <div class="flex">
+                                    <input type="text" id="quick_sell_symbol" class="flex-grow rounded-l-md border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="合约">
+                                    <input type="number" id="quick_sell_volume" class="w-16 border border-gray-300 px-2 py-1 text-sm focus:border-blue-500 focus:ring-blue-500" placeholder="数量">
+                                    <button onclick="quickMarketSell()" class="bg-red-500 text-white px-3 py-1 rounded-r-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 text-sm">卖出</button>
+                                </div>
+                            </div>
+                            <!-- 全部撤单按钮 -->
+                            <div class="flex flex-col h-full">
+                                <label class="block text-xs font-medium text-gray-700 mb-1 invisible">&nbsp;</label>
+                                <div class="flex mt-auto">
+                                    <button onclick="quickCancelAll()" class="w-full bg-gray-500 text-white px-3 py-1 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1 text-sm">全部撤单</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- 活动委托 -->
+                     <div class="bg-white p-6 rounded-lg shadow mb-6">
+                         <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">活动委托</h2>
+                         <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">委托号</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">合约</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方向</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">开平</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">类型</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">价格</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">已成交</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">CTP.1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">rb2110.SHFE</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-red-600">空</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">开仓</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">限价</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5,120.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">已提交</span></td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-red-600 hover:text-red-900">撤单</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">IB.1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">AAPL.SMART</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">多</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">开仓</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">限价</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">150.25</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">100</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">50</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">部分成交</span></td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">
+                                            <a href="#" class="text-red-600 hover:text-red-900">撤单</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                     </div>
+
+                     <!-- 成交记录 -->
+                     <div class="bg-white p-6 rounded-lg shadow mb-6">
+                         <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">成交记录</h2>
+                         <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">成交号</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">委托号</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">合约</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方向</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">开平</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">价格</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">IB.T1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">IB.1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">AAPL.SMART</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">多</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">开仓</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">150.25</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">50</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">14:30:25</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">CTP.T1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">CTP.2</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">IF2109.CFFEX</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-red-600">空</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">开仓</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5,230.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">14:15:10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                     </div>
+
+                     <!-- 持仓信息 -->
+                     <div class="bg-white p-6 rounded-lg shadow">
+                         <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">持仓信息</h2>
+                         <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">合约</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方向</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">昨仓</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">冻结</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">均价</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">盈亏</th>
+                                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">接口</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">IF2109.CFFEX</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-red-600">空</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">1</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5,230.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">+8,400.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">CTP</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">rb2110.SHFE</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-red-600">空</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">10</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5,120.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">+5,200.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">CTP</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">AAPL.SMART</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">多</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">100</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">0</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">50</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">150.25</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-red-600">-1,200.00</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">IB</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                     </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Any existing scripts -->
+    <script>
+        // ... existing page script if any ...
+
+        // Quick Action Functions (Placeholders)
+        function quickLiquidate() {
+            const symbol = document.getElementById('quick_liq_symbol').value.trim();
+            if (!symbol) {
+                alert('请输入要全平的合约代码。');
+                return;
+            }
+            if (confirm(`确认要市价全平 ${symbol} 的所有持仓吗？`)) {
+                console.log(`市价全平 ${symbol}`);
+                alert(`模拟市价全平 ${symbol} 指令已发送。`);
+                // TODO: Implement actual API call
+            }
+        }
+
+        function quickReverse() {
+            const symbol = document.getElementById('quick_rev_symbol').value.trim();
+            if (!symbol) {
+                alert('请输入要反手的合约代码。');
+                return;
+            }
+             if (confirm(`确认要市价反手 ${symbol} 的持仓吗？`)) {
+                 console.log(`市价反手 ${symbol}`);
+                 alert(`模拟市价反手 ${symbol} 指令已发送。`);
+                 // TODO: Implement actual API call
+             }
+        }
+
+        function quickMarketBuy() {
+            const symbol = document.getElementById('quick_buy_symbol').value.trim();
+            const volume = document.getElementById('quick_buy_volume').value.trim();
+            if (!symbol || !volume || volume <= 0) {
+                alert('请输入有效的合约代码和买入数量。');
+                return;
+            }
+            if (confirm(`确认要市价买入 ${volume} 手 ${symbol} 吗？`)) {
+                console.log(`市价买入 ${volume} 手 ${symbol}`);
+                alert(`模拟市价买入 ${volume} 手 ${symbol} 指令已发送。`);
+                // TODO: Implement actual API call
+            }
+        }
+
+        function quickMarketSell() {
+            const symbol = document.getElementById('quick_sell_symbol').value.trim();
+            const volume = document.getElementById('quick_sell_volume').value.trim();
+            if (!symbol || !volume || volume <= 0) {
+                alert('请输入有效的合约代码和卖出数量。');
+                return;
+            }
+             if (confirm(`确认要市价卖出 ${volume} 手 ${symbol} 吗？`)) {
+                 console.log(`市价卖出 ${volume} 手 ${symbol}`);
+                 alert(`模拟市价卖出 ${volume} 手 ${symbol} 指令已发送。`);
+                 // TODO: Implement actual API call
+             }
+        }
+
+        function quickCancelAll() {
+            if (confirm('确认要撤销所有活动委托吗？')) {
+                console.log('全部撤单');
+                alert('模拟全部撤单指令已发送。');
+                // TODO: Implement actual API call
+            }
+        }
+
+    </script>
+
+    <!-- Load Sidebar Script -->
+    <script src="../js/load_sidebar.js"></script>
+
+</body>
+</html>

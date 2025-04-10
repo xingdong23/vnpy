@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeighNa 交易平台 - 策略回测</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-link.active { background-color: #3b82f6; color: white; }
+    </style>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-200">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden ml-64">
+            <!-- 头部 -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-800">策略回测</h1>
+            </header>
+
+            <!-- 内容区域 -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <div class="container mx-auto">
+                    <!-- 回测配置表单 -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4">回测配置</h2>
+                        <form id="backtest_form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="strategy_select" class="block text-sm font-medium text-gray-700">选择策略</label>
+                                    <select id="strategy_select" name="strategy_select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <option value="">请选择策略</option>
+                                        <option value="1">双均线策略</option>
+                                        <option value="2">布林带策略</option>
+                                        <option value="3">海龟交易策略</option>
+                                        <option value="4">MACD股票策略</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="symbol" class="block text-sm font-medium text-gray-700">交易合约</label>
+                                    <input type="text" id="symbol" name="symbol" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="例如: IF2109.CFFEX">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="start_date" class="block text-sm font-medium text-gray-700">开始日期</label>
+                                    <input type="date" id="start_date" name="start_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label for="end_date" class="block text-sm font-medium text-gray-700">结束日期</label>
+                                    <input type="date" id="end_date" name="end_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="initial_capital" class="block text-sm font-medium text-gray-700">初始资金</label>
+                                <input type="number" id="initial_capital" name="initial_capital" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1000000">
+                            </div>
+
+                            <div>
+                                <label for="strategy_params" class="block text-sm font-medium text-gray-700">策略参数</label>
+                                <textarea id="strategy_params" name="strategy_params" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder='{"fast_window": 10, "slow_window": 20}'></textarea>
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                    开始回测
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 回测结果 -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4">回测结果</h2>
+                        <div id="backtest_results" class="hidden">
+                            <!-- 回测结果摘要 -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <div class="border rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-500">年化收益率</span>
+                                        <span class="text-green-600 font-bold">+15.8%</span>
+                                    </div>
+                                </div>
+                                <div class="border rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-500">最大回撤</span>
+                                        <span class="text-red-600 font-bold">-8.5%</span>
+                                    </div>
+                                </div>
+                                <div class="border rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-500">夏普比率</span>
+                                        <span class="font-bold">1.2</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 收益曲线图表 -->
+                            <div class="mb-6">
+                                <h3 class="text-md font-semibold text-gray-700 mb-2">收益曲线</h3>
+                                <div class="h-64 bg-gray-100 rounded">
+                                    <!-- 这里将放置图表 -->
+                                    <div class="h-full flex items-center justify-center text-gray-500">
+                                        图表加载中...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 交易记录 -->
+                            <div>
+                                <h3 class="text-md font-semibold text-gray-700 mb-2">交易记录</h3>
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">时间</th>
+                                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">合约</th>
+                                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">方向</th>
+                                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">价格</th>
+                                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">数量</th>
+                                                <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">盈亏</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <!-- 示例交易记录 -->
+                                            <tr>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">2021-01-05 09:30:15</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">IF2109.CFFEX</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">买入</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5,230.00</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">1</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">2021-01-15 14:15:30</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">IF2109.CFFEX</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-red-600">卖出</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">5,280.00</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">1</td>
+                                                <td class="px-4 py-3 whitespace-nowrap text-sm text-green-600">+5,000.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 未开始回测提示 -->
+                        <div id="no_results" class="text-center py-10">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">暂无回测结果</h3>
+                            <p class="mt-1 text-sm text-gray-500">请配置并运行回测以查看结果</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 回测表单提交
+        document.getElementById('backtest_form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 显示回测结果区域
+            document.getElementById('no_results').classList.add('hidden');
+            document.getElementById('backtest_results').classList.remove('hidden');
+
+            // 这里应该是发送回测请求到后端，然后处理返回的结果
+            // 这里只是模拟
+            console.log('开始回测...');
+            console.log('策略:', document.getElementById('strategy_select').value);
+            console.log('合约:', document.getElementById('symbol').value);
+            console.log('开始日期:', document.getElementById('start_date').value);
+            console.log('结束日期:', document.getElementById('end_date').value);
+            console.log('初始资金:', document.getElementById('initial_capital').value);
+            console.log('策略参数:', document.getElementById('strategy_params').value);
+        });
+
+        // 根据URL参数自动选择策略
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const strategyId = urlParams.get('strategy');
+
+            if (strategyId) {
+                const strategySelect = document.getElementById('strategy_select');
+                strategySelect.value = strategyId;
+
+                // 这里可以根据策略ID自动填充其他字段
+                // 例如，从后端获取策略的默认参数等
+            }
+        });
+    </script>
+
+    <!-- Load Sidebar Script -->
+    <script src="../js/load_sidebar.js"></script>
+</body>
+</html>

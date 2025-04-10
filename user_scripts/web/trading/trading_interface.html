@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeighNa 交易平台 - 交易接口</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-link.active { background-color: #3b82f6; color: white; }
+    </style>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-200">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden ml-64">
+            <!-- 头部 -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold text-gray-800">交易接口</h1>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    + 添加接口
+                </button>
+            </header>
+
+            <!-- 内容区域 -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+                <div class="container mx-auto">
+                    <!-- 接口状态概览 -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4">接口状态概览</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="border rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">已连接接口</span>
+                                    <span class="text-green-600 font-bold">2</span>
+                                </div>
+                            </div>
+                            <div class="border rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">未连接接口</span>
+                                    <span class="text-red-600 font-bold">1</span>
+                                </div>
+                            </div>
+                            <div class="border rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">总接口数</span>
+                                    <span class="font-bold">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 接口列表 -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4">接口列表</h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">接口名称</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">类型</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">上次连接时间</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- CTP接口 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">CTP</div>
+                                                    <div class="text-xs text-gray-500">中国金融期货交易所</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">期货</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">已连接</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-04-10 09:30:15</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-red-600 hover:text-red-900 mr-3" data-gateway="ctp" data-connected="true">断开</button>
+                                            <button class="text-blue-600 hover:text-blue-900">设置</button>
+                                        </td>
+                                    </tr>
+                                    <!-- IB接口 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">IB</div>
+                                                    <div class="text-xs text-gray-500">盈透证券</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">股票/期货/期权</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">已连接</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-04-10 09:35:22</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-red-600 hover:text-red-900 mr-3" data-gateway="ib" data-connected="true">断开</button>
+                                            <button class="text-blue-600 hover:text-blue-900">设置</button>
+                                        </td>
+                                    </tr>
+                                    <!-- XTP接口 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">XTP</div>
+                                                    <div class="text-xs text-gray-500">中泰证券</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">股票</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">未连接</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-04-09 16:45:10</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-green-600 hover:text-green-900 mr-3" data-gateway="xtp" data-connected="false">连接</button>
+                                            <button class="text-blue-600 hover:text-blue-900">设置</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 接口日志 -->
+                    <div class="bg-white p-6 rounded-lg shadow mt-6">
+                        <h2 class="text-lg font-semibold text-gray-700 mb-4">接口日志</h2>
+                        <div class="bg-gray-100 p-4 rounded h-64 overflow-y-auto font-mono text-sm">
+                            <p class="text-gray-600">[09:30:15] CTP接口连接成功</p>
+                            <p class="text-gray-600">[09:30:16] CTP接口登录成功</p>
+                            <p class="text-gray-600">[09:30:18] CTP接口查询账户资金成功</p>
+                            <p class="text-gray-600">[09:30:20] CTP接口查询持仓成功</p>
+                            <p class="text-gray-600">[09:35:22] IB接口连接成功</p>
+                            <p class="text-gray-600">[09:35:24] IB接口登录成功</p>
+                            <p class="text-gray-600">[09:35:26] IB接口查询账户资金成功</p>
+                            <p class="text-gray-600">[09:35:28] IB接口查询持仓成功</p>
+                            <p class="text-red-600">[09:40:15] XTP接口连接失败: 用户名或密码错误</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 添加接口模态框 -->
+    <div id="add_gateway_modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium text-gray-900">添加交易接口</h3>
+                <button id="close_modal" class="text-gray-400 hover:text-gray-500">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label for="gateway_type" class="block text-sm font-medium text-gray-700">接口类型</label>
+                    <select id="gateway_type" name="gateway_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="ctp">CTP</option>
+                        <option value="ib">IB</option>
+                        <option value="xtp">XTP</option>
+                        <option value="tap">TAP</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="gateway_name" class="block text-sm font-medium text-gray-700">接口名称</label>
+                    <input type="text" id="gateway_name" name="gateway_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="user_id" class="block text-sm font-medium text-gray-700">用户名</label>
+                    <input type="text" id="user_id" name="user_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">密码</label>
+                    <input type="password" id="password" name="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="td_address" class="block text-sm font-medium text-gray-700">交易服务器</label>
+                    <input type="text" id="td_address" name="td_address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="md_address" class="block text-sm font-medium text-gray-700">行情服务器</label>
+                    <input type="text" id="md_address" name="md_address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancel_add" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">取消</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">添加</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 添加接口模态框
+        const addGatewayButton = document.querySelector('header button');
+        const addGatewayModal = document.getElementById('add_gateway_modal');
+        const closeModalButton = document.getElementById('close_modal');
+        const cancelAddButton = document.getElementById('cancel_add');
+
+        addGatewayButton.addEventListener('click', function() {
+            addGatewayModal.classList.remove('hidden');
+        });
+
+        closeModalButton.addEventListener('click', function() {
+            addGatewayModal.classList.add('hidden');
+        });
+
+        cancelAddButton.addEventListener('click', function() {
+            addGatewayModal.classList.add('hidden');
+        });
+
+        // 连接/断开按钮功能
+        document.querySelectorAll('button[data-gateway]').forEach(button => {
+            button.addEventListener('click', function() {
+                const gatewayId = this.dataset.gateway;
+                const isConnected = this.dataset.connected === 'true';
+                const statusCell = this.closest('tr').querySelector('td:nth-child(3) span');
+
+                if (isConnected) {
+                    // 断开连接
+                    this.textContent = '连接';
+                    this.classList.remove('text-red-600', 'hover:text-red-900');
+                    this.classList.add('text-green-600', 'hover:text-green-900');
+                    this.dataset.connected = 'false';
+
+                    statusCell.textContent = '未连接';
+                    statusCell.classList.remove('bg-green-100', 'text-green-800');
+                    statusCell.classList.add('bg-red-100', 'text-red-800');
+
+                    // 添加日志
+                    const logContainer = document.querySelector('.bg-gray-100.p-4');
+                    const now = new Date();
+                    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+                    const logEntry = document.createElement('p');
+                    logEntry.className = 'text-gray-600';
+                    logEntry.textContent = `[${timeStr}] ${gatewayId.toUpperCase()}接口断开连接`;
+                    logContainer.appendChild(logEntry);
+                    logContainer.scrollTop = logContainer.scrollHeight;
+                } else {
+                    // 连接
+                    this.textContent = '断开';
+                    this.classList.remove('text-green-600', 'hover:text-green-900');
+                    this.classList.add('text-red-600', 'hover:text-red-900');
+                    this.dataset.connected = 'true';
+
+                    statusCell.textContent = '已连接';
+                    statusCell.classList.remove('bg-red-100', 'text-red-800');
+                    statusCell.classList.add('bg-green-100', 'text-green-800');
+
+                    // 添加日志
+                    const logContainer = document.querySelector('.bg-gray-100.p-4');
+                    const now = new Date();
+                    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+                    const logEntry = document.createElement('p');
+                    logEntry.className = 'text-gray-600';
+                    logEntry.textContent = `[${timeStr}] ${gatewayId.toUpperCase()}接口连接成功`;
+                    logContainer.appendChild(logEntry);
+
+                    // 添加登录成功日志
+                    setTimeout(() => {
+                        const loginLog = document.createElement('p');
+                        loginLog.className = 'text-gray-600';
+                        loginLog.textContent = `[${timeStr}] ${gatewayId.toUpperCase()}接口登录成功`;
+                        logContainer.appendChild(loginLog);
+                        logContainer.scrollTop = logContainer.scrollHeight;
+                    }, 1000);
+                }
+
+                // 更新接口状态概览
+                updateGatewayStatusSummary();
+            });
+        });
+
+        // 更新接口状态概览
+        function updateGatewayStatusSummary() {
+            const connectedGateways = document.querySelectorAll('button[data-connected="true"]').length;
+            const totalGateways = document.querySelectorAll('button[data-gateway]').length;
+            const disconnectedGateways = totalGateways - connectedGateways;
+
+            document.querySelector('.grid-cols-1.md\\:grid-cols-3 span.text-green-600').textContent = connectedGateways;
+            document.querySelector('.grid-cols-1.md\\:grid-cols-3 span.text-red-600').textContent = disconnectedGateways;
+        }
+    </script>
+
+    <!-- Load Sidebar Script -->
+    <script src="../js/load_sidebar.js"></script>
+</body>
+</html>
